@@ -70,11 +70,8 @@ private[net] trait SocketCompanionPlatform {
         val result =
           if (read == 0) Chunk.empty
           else {
-            val dest = ByteBuffer.allocateDirect(read)
             (buffer: Buffer).flip()
-            dest.put(buffer)
-            (dest: Buffer).flip()
-            Chunk.byteBuffer(dest)
+            Chunk.byteBuffer(buffer)
           }
         (buffer: Buffer).clear()
         result
